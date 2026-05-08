@@ -1,14 +1,10 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchJoke } from "./seestore";  
+import { fetchJoke } from "./seestore";
 
 function App() {
   const [category, setCategory] = useState("");
-
-  const joke = useSelector(function (state) {
-    return state.joke.joke;
-  });
-
+  const joke = useSelector((state) => state.joke.joke);
   const dispatch = useDispatch();
 
   function handleCategoryChange(e) {
@@ -20,10 +16,10 @@ function App() {
   }
 
   return (
-    <div>
-      <h2>Balakrishnan Joke Generator</h2>
+    <div style={styles.container}>
+      <h2 style={styles.title}> Balakrishnan Joke Generator</h2>
 
-      <select onChange={handleCategoryChange}>
+      <select style={styles.select} onChange={handleCategoryChange}>
         <option value="">Choose Category</option>
         <option value="animal">Animal</option>
         <option value="career">Career</option>
@@ -43,14 +39,59 @@ function App() {
         <option value="travel">Travel</option>
       </select>
 
-  
-      <button onClick={handleFetchJoke}>Get Joke</button>
+      <button style={styles.button} onClick={handleFetchJoke}>
+        Get Joke
+      </button>
 
-      <div>
-        <h3>{joke}</h3>
+      <div style={styles.jokeBox}>
+        <h3 style={styles.jokeText}>{joke}</h3>
       </div>
     </div>
   );
 }
 
+const styles = {
+  container: {
+    fontFamily: "Arial, sans-serif",
+    textAlign: "center",
+    padding: "40px",
+    background: "linear-gradient(135deg, #ffecd2, #fcb69f)",
+    minHeight: "100vh",
+  },
+  title: {
+    fontSize: "28px",
+    marginBottom: "20px",
+    color: "#333",
+  },
+  select: {
+    padding: "10px",
+    fontSize: "16px",
+    borderRadius: "8px",
+    border: "1px solid #ccc",
+    marginRight: "10px",
+  },
+  button: {
+    padding: "10px 20px",
+    fontSize: "16px",
+    borderRadius: "8px",
+    border: "none",
+    backgroundColor: "#ff6f61",
+    color: "#fff",
+    cursor: "pointer",
+    transition: "0.3s",
+  },
+  jokeBox: {
+    marginTop: "30px",
+    padding: "20px",
+    backgroundColor: "#fff",
+    borderRadius: "12px",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
+    maxWidth: "600px",
+    margin: "30px auto",
+  },
+  jokeText: {
+    fontSize: "20px",
+    color: "#444",
+  },
+};
 export default App;
